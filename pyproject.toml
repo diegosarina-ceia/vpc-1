@@ -8,7 +8,13 @@ packages = [{include = "vpc_1"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
+numpy = "^2.0.0"
+opencv-python = "^4.10.0.84"
+matplotlib = "^3.9.1"
 
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
 
 [build-system]
 requires = ["poetry-core"]
