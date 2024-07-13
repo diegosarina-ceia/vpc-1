@@ -11,6 +11,8 @@ python = "^3.12"
 numpy = "^2.0.0"
 opencv-python = "^4.10.0.84"
 matplotlib = "^3.9.1"
+ipykernel = "^6.29.5"
+pandas = "^2.2.2"
 
 
 [tool.poetry.group.dev.dependencies]
