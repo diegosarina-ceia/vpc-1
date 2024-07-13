@@ -25,7 +25,10 @@ def plot_images(images, titles=None, figsize=(15, 5)) -> None:
     fig, axs = plt.subplots(1, len(images), figsize=figsize)
     if titles is None:
         titles = [f'Image_{i+1}' for i in range(len(images))]
-    
+        
+    if len(images) == 1:
+        axs = [axs]
+
     for i, ax in enumerate(axs):
         ax.imshow(images[i])
         ax.set_title(titles[i])
