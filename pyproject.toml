@@ -2,7 +2,10 @@
 name = "vpc-1"
 version = "0.1.0"
 description = "Poetry packages para trabajos practicos de vision por computadora 1"
-authors = ["Diego <sarinadiego@gmail.com>"]
+authors = [
+    "Diego Sarina <sarinadiego@gmail.com>",
+    "Marco Joel Isidro <marcojoelisidro@gmail.com>",
+]
 readme = "README.md"
 packages = [{include = "vpc_1"}]
 

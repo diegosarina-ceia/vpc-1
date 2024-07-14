@@ -66,3 +66,16 @@ def plot_images_comparison(original_images, modified_images, original_titles=Non
         axs[1].axis('off')
 
         plt.show()
+
+
+def change_rgb2hsv(image: np.ndarray) -> np.ndarray:
+    """
+    Change the color space from RGB to HSV
+
+    args:
+        image: np.ndarray
+            Image to transform
+    """
+    return cv2.cvtColor(image, cv2.COLOR_RGB2HSV)
+
+
