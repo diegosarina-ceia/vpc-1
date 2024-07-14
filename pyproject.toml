@@ -1,0 +1,26 @@
+[tool.poetry]
+name = "vpc-1"
+version = "0.1.0"
+description = "Poetry packages para trabajos practicos de vision por computadora 1"
+authors = [
+    "Diego Sarina <sarinadiego@gmail.com>",
+    "Marco Joel Isidro <marcojoelisidro@gmail.com>",
+]
+readme = "README.md"
+packages = [{include = "vpc_1"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.0.0"
+opencv-python = "^4.10.0.84"
+matplotlib = "^3.9.1"
+ipykernel = "^6.29.5"
+pandas = "^2.2.2"
+
+
+[tool.poetry.group.dev.dependencies]
+ipykernel = "^6.29.5"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
