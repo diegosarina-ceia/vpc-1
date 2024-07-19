@@ -1,100 +1,82 @@
 import cv2
 import numpy as np
 import matplotlib.pyplot as plt
-from IPython.display import display, clear_output
-from threading import Thread
 
-def show_img(img, size=(10,6), title=''):
-    plt.figure(figsize=size)
-    plt.imshow(cv2.cvtColor(cv2.imread(img), cv2.COLOR_BGR2RGB))
-    plt.title(title)
-    plt.axis('off')
-    plt.show()
-
-def show_imgs(imgs, size=(10, 6), title=''):
-    num_imgs = len(imgs)
-    rows = num_imgs
-    cols = 1  # Siempre una sola columna
-
-    plt.figure(figsize=(size[0], size[1] * rows))
-    for i, img in enumerate(imgs):
-        plt.subplot(rows, cols, i + 1)
-        img_data = cv2.cvtColor(cv2.imread(img), cv2.COLOR_BGR2RGB)
-        plt.imshow(img_data)
-        plt.title(f"{title} {i+1}" if title else '')
-        plt.axis('off')
-    plt.tight_layout()
-    plt.show()
-
-def get_images_from_video(video_path:str, images_path_save:str='enunciado/frames/') -> None:
-    capture = cv2.VideoCapture(video_path)
-    count = 0
-
-    while (capture.isOpened()):
-        ret, frame = capture.read()
-        if (ret is True):
-            cv2.imwrite(images_path_save + 'IMG_%04d.jpg' % count, frame)
-            count += 1
-            if (cv2.waitKey(1) == ord('s')):
-                break
-        else:
-            break
-    capture.release()
-    cv2.destroyAllWindows()
-
-
-def show_roi_on_image(image, roi_percentage=0.1):
-    height, width = image.shape
-    roi_height = int(height * roi_percentage)
-    roi_width = int(width * roi_percentage)
-    
-    y1 = height // 2 - roi_height // 2
-    y2 = y1 + roi_height
-    x1 = width // 2 - roi_width // 2
-    x2 = x1 + roi_width
-    
-    # Dibujar la imagen y el rectángulo del ROI
-    plt.figure(figsize=(10, 10))
-    plt.imshow(image, cmap='gray')
-    plt.gca().add_patch(plt.Rectangle((x1, y1), roi_width, roi_height, edgecolor='red', facecolor='none', linewidth=2))
-    plt.title('Image with ROI')
-    plt.show()
-
-
-def show_imgs_with_roi(img_paths, roi_percentage=0.1, size=(10, 6), title=''):
+def plot_video_quality_measure(quality_measures: list) -> None:
     """
-    Muestra una lista de imágenes con una región de interés (ROI) destacada.
+    Grafica la Medida de Calidad de Imagen (FM) de cada frame en un video.
 
     args:
-        img_paths (list of str): Lista de rutas a las imágenes.
-        roi_percentage (float): Porcentaje del tamaño de la imagen para definir la ROI. Default es 0.1 (10%).
-        size (tuple): Tamaño de la figura para cada imagen (ancho, alto). Default es (10, 6).
-        title (str): Título base para las imágenes. Default es ''.
-
-    return:
-        None
+        quality_measures (list): List of Image Quality Measures (FM) for each frame in the video.
     """
-    num_imgs = len(img_paths)
-    rows = num_imgs
-    cols = 1  # Siempre una sola columna
-
-    plt.figure(figsize=(size[0], size[1] * rows))
-    for i, img_path in enumerate(img_paths):
-        image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
-        height, width = image.shape
-        roi_height = int(height * roi_percentage)
-        roi_width = int(width * roi_percentage)
-        
-        y1 = height // 2 - roi_height // 2
-        y2 = y1 + roi_height
-        x1 = width // 2 - roi_width // 2
-        x2 = x1 + roi_width
-
-        plt.subplot(rows, cols, i + 1)
-        plt.imshow(image, cmap='gray')
-        plt.gca().add_patch(plt.Rectangle((x1, y1), roi_width, roi_height, edgecolor='red', facecolor='none', linewidth=2))
-        plt.title(f"{title} {i+1}" if title else '')
-        plt.axis('off')
-    
-    plt.tight_layout()
+    plt.plot(quality_measures)
+    plt.xlabel('Frame')
+    plt.ylabel('Image Quality Measure (FM)')
+    plt.title('Image Quality Measure (FM) for each frame in the video')
     plt.show()
+
+def draw_image_detection_none(image: np.ndarray, *args) -> np.ndarray:
+    return image
+
+def draw_image_detection_roi(image: np.ndarray, shape_image: tuple, color: tuple, roi_percentage: float) -> np.ndarray:
+    """
+    Dibuja un círculo en el centro de la imagen.
+
+    args:
+        image (np.ndarray): Input image.
+        color (tuple): Color of the circle.
+        **kwargs: Arbitrary keyword arguments.
+    
+    return:
+        np.ndarray: Output image with the circle drawn.
+    """
+    roi_height = int(shape_image[1] * roi_percentage)
+    roi_width = int(shape_image[0] * roi_percentage)
+    y1 = shape_image[1] // 2 - roi_height // 2
+    y2 = y1 + roi_height
+    x1 = shape_image[0] // 2 - roi_width // 2
+    x2 = x1 + roi_width
+    
+    cv.rectangle(image, (x1, y1), (x2, y2), color, 2)
+
+    return image
+
+def draw_image_detection_matrix(image: np.ndarray, shape_image: tuple, color: tuple, grid_size: tuple, scale_factor:float=1.0, offset:int=2) -> np.ndarray:
+    """
+    Dibuja una matriz de círculos en la imagen.
+
+    args:
+        image (np.ndarray): Input image.
+        shape_image (tuple): Shape of the input image.
+        color (tuple): Color of the circle.
+        grid_size (tuple): Number of rows and columns in the grid.
+        scale_factor (float): Scale factor to resize the circles.
+    
+    return:
+        np.ndarray: Output image with the circle drawn.
+    """
+    # Calcular el tamaño ajustado de la grilla basado en el factor de escala
+    scaled_height = int(shape_image[1] * scale_factor)
+    scaled_width = int(shape_image[0] * scale_factor)
+
+    rows, cols = grid_size
+    step_y = scaled_height // rows
+    step_x = scaled_width // cols
+
+    center_y = shape_image[1] // 2
+    center_x = shape_image[0] // 2
+    
+    start_y = center_y - (scaled_height // 2)
+    start_x = center_x - (scaled_width // 2)
+
+    # Añadir los valores de la matriz de enfoque como texto en cada subregión
+    for i in range(rows):
+        for j in range(cols):
+            y1 = start_y + i * step_y + offset
+            y2 = y1 + step_y - offset
+            x1 = start_x + j * step_x + offset
+            x2 = x1 + step_x - offset
+            
+            cv.rectangle(image, (x1, y1), (x2, y2), color, 2)           
+
+    return image
