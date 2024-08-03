@@ -12,11 +12,11 @@ packages = [{include = "vpc_1"}]
 [tool.poetry.dependencies]
 python = "^3.12"
 numpy = "^2.0.0"
-opencv-python = "^4.10.0.84"
 matplotlib = "^3.9.1"
 ipykernel = "^6.29.5"
 pandas = "^2.2.2"
 ipywidgets = "^8.1.3"
+opencv-python = "^4.10.0.84"
 
 
 [tool.poetry.group.dev.dependencies]
