@@ -8,7 +8,7 @@ Repositorio con los Trabajos prácticos de la materia Visión Computadora 1 de l
 ├── README.md
 ├── pyproject.toml
 ├── tp1
-│   ├── TP1_VisionComputadora1.ipynb (resolucion)
+│   ├── TP1_VisionComputadora1.ipynb
 │   ├── enunciado
 │   │   ├── coord_cromaticas
 │   │   │   ├── CoordCrom_1.png
@@ -29,33 +29,48 @@ Repositorio con los Trabajos prácticos de la materia Visión Computadora 1 de l
 │   │       └── wp_red2.jpg
 │   ├── segmentacion.py
 │   └── utils
-│       ├── __init__.py
-│       └── utils.py (funciones auxiliares)
-└── tp2
-    ├── TP2_VisionComputadora1.ipynb (resolucion)
+│       └── utils.py
+├── tp2
+│   ├── TP2_VisionComputadora1.ipynb
+│   ├── enunciado
+│   │   ├── focus_video.mov
+│   │   ├── frames
+│   │   │   ├── frame_borroso.jpg
+│   │   │   ├── frame_medio_borroso_1.jpg
+│   │   │   ├── frame_medio_borroso_2.jpg
+│   │   │   └── frame_nitido.jpg
+│   │   └── proposed_algorithm.png
+│   ├── output_video
+│   │   ├── quality_measure_all_frame.avi
+│   │   ├── quality_measure_laplacian.avi
+│   │   ├── quality_measure_matrix_(3, 3).avi
+│   │   ├── quality_measure_matrix_(4, 4).avi
+│   │   ├── quality_measure_matrix_(5, 5).avi
+│   │   ├── quality_measure_matrix_(7, 5).avi
+│   │   ├── quality_measure_roi.avi
+│   │   └── unsharp_masking.avi
+│   ├── papers
+│   │   ├── AnalysisOfFocusMeasureOperators.pdf
+│   │   └── ImageSharpnessMeasureforBlurredImagesinFrequency.pdf
+│   └── utils
+│       └── utils.py
+└── tp3
+    ├── AnalisisExploratorio.ipynb
+    ├── TP3_VisionComputadora1.ipynb
     ├── enunciado
-    │   ├── focus_video.mov
-    │   ├── frames (archivos auxiliares)
-    │   │   ├── frame_borroso.jpg
-    │   │   ├── frame_medio_borroso_1.jpg
-    │   │   ├── frame_medio_borroso_2.jpg
-    │   │   └── frame_nitido.jpg
-    │   └── proposed_algorithm.png
-    ├── output_video (salida de videos)
-    │   ├── quality_measure_all_frame.avi
-    │   ├── quality_measure_laplacian.avi
-    │   ├── quality_measure_matrix_(3, 3).avi
-    │   ├── quality_measure_matrix_(4, 4).avi
-    │   ├── quality_measure_matrix_(5, 5).avi
-    │   ├── quality_measure_matrix_(7, 5).avi
-    │   ├── quality_measure_roi.avi
-    │   └── unsharp_masking.avi
-    ├── papers
-    │   ├── AnalysisOfFocusMeasureOperators.pdf
-    │   └── ImageSharpnessMeasureforBlurredImagesinFrequency.pdf
+    │   ├── enunciado.png
+    │   ├── images
+    │   │   ├── COCA-COLA-LOGO.jpg
+    │   │   ├── coca_logo_1.png
+    │   │   ├── coca_logo_2.png
+    │   │   ├── coca_multi.png
+    │   │   ├── coca_retro_1.png
+    │   │   ├── coca_retro_2.png
+    │   │   └── logo_1.png
+    │   └── template
+    │       └── pattern.png
     └── utils
-        ├── __init__.py
-        └── utils.py (funciones auxiliares)
+        └── utils.py
 ```
 
 ## Cargar el entorno de trabajo
