@@ -52,8 +52,8 @@ def graf_boxplot(image: np.ndarray, match: list) -> np.ndarray:
     x, y = int(match_location[0]/match_scale), int(match_location[1]/match_scale)
     h, w = int(match_shape_temple[0]/match_scale), int(match_shape_temple[1]/match_scale)
 
-    cv.rectangle(image, (x, y), (x + w, y + h), (0, 0, 255), 2)
-    cv.rectangle(image, (x, y), (x + w, y - 20), (0, 0, 255), -1)
+    cv.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
+    cv.rectangle(image, (x, y), (x + w, y - 20), (0, 255, 0), -1)
     cv.putText(image, f'{match_value:.2f}', (x, y - 5), cv.FONT_HERSHEY_SIMPLEX, 0.33, (255, 255, 255), 1)
 
     return image
